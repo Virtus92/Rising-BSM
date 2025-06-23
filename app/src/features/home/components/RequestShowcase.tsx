@@ -50,14 +50,14 @@ const RequestShowcase = () => {
       description: 'Komplettservice für Privat- und Firmenumzüge'
     },
     {
-      id: 'kranfuehrer',
-      name: 'Kranführer',
-      description: 'Zertifizierte Kranführer für Bauprojekte'
-    },
-    {
       id: 'hausbetreuung',
       name: 'Hausbetreuung',
       description: 'Umfassende Betreuung und Wartung'
+    },
+    {
+      id: 'weitere',
+      name: 'Weitere Dienstleistungen',
+      description: 'Spezialisierte Services nach Bedarf'
     }
   ];
 

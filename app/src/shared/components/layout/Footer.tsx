@@ -124,7 +124,7 @@ const Footer = () => {
               <li>
                 <Link href="/#services" className="group flex items-center text-slate-300 hover:text-white transition-colors duration-300">
                   <span className="w-1.5 h-1.5 rounded-full bg-orange-400 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                  Kranführer
+                  Weitere Dienstleistungen
                 </Link>
               </li>
             </ul>
@@ -165,6 +165,12 @@ const Footer = () => {
                 <Link href="/impressum" className="group flex items-center text-slate-300 hover:text-white transition-colors duration-300">
                   <span className="w-1.5 h-1.5 rounded-full bg-orange-400 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                   Impressum
+                </Link>
+              </li>
+              <li>
+                <Link href="/datenschutz" className="group flex items-center text-slate-300 hover:text-white transition-colors duration-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-400 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                  Datenschutz
                 </Link>
               </li>
             </ul>

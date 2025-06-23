@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Check, ArrowRight, X, Snowflake, TreePine, Sparkles, Wrench, Truck, Home } from 'lucide-react';
+import { Check, ArrowRight, X, Snowflake, TreePine, Sparkles, Wrench, Truck, Home, Users } from 'lucide-react';
 import Image from 'next/image';
 
 /**
@@ -211,41 +211,19 @@ const Services = () => {
         </div>
       )
     },
-    kranfuehrer: {
-      title: 'Kranführer',
-      subtitle: 'Professionelle Krandienstleistungen',
-      image: '/images/kranfuehrer.jpg',
+    weitere: {
+      title: 'Weitere Dienstleistungen',
+      subtitle: 'Spezialisierte Services nach Bedarf',
+      image: '/images/weitere-dienstleistungen.jpg',
       content: (
         <div className="space-y-6">
           <p className="text-gray-700 dark:text-gray-300">
-            Unsere zertifizierten Kranführer und moderne Kranausrüstung stehen für Ihre Bau- und Montageprojekte zur Verfügung.
+            Ergänzend zu unseren Hauptdienstleistungen bieten wir spezialisierte Services für besondere Anforderungen.
           </p>
           
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-              <h4 className="font-semibold text-lg mb-3">Kranarbeiten</h4>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <Check size={20} className="text-green-600 mr-2 mt-0.5" />
-                  <span>Baukranarbeiten</span>
-                </li>
-                <li className="flex items-start">
-                  <Check size={20} className="text-green-600 mr-2 mt-0.5" />
-                  <span>Schwerlastmontage</span>
-                </li>
-                <li className="flex items-start">
-                  <Check size={20} className="text-green-600 mr-2 mt-0.5" />
-                  <span>Baumfällarbeiten</span>
-                </li>
-                <li className="flex items-start">
-                  <Check size={20} className="text-green-600 mr-2 mt-0.5" />
-                  <span>Industriemontagen</span>
-                </li>
-              </ul>
-            </div>
-            
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-              <h4 className="font-semibold text-lg mb-3">Service & Sicherheit</h4>
+              <h4 className="font-semibold text-lg mb-3">Kranführer-Service</h4>
               <ul className="space-y-2">
                 <li className="flex items-start">
                   <Check size={20} className="text-green-600 mr-2 mt-0.5" />
@@ -253,15 +231,21 @@ const Services = () => {
                 </li>
                 <li className="flex items-start">
                   <Check size={20} className="text-green-600 mr-2 mt-0.5" />
-                  <span>Sicherheitskonzepte</span>
+                  <span>Bau- & Industriemontagen</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+              <h4 className="font-semibold text-lg mb-3">Personalleasing</h4>
+              <ul className="space-y-2">
+                <li className="flex items-start">
+                  <Check size={20} className="text-green-600 mr-2 mt-0.5" />
+                  <span>Qualifiziertes Fachpersonal</span>
                 </li>
                 <li className="flex items-start">
                   <Check size={20} className="text-green-600 mr-2 mt-0.5" />
-                  <span>Projektplanung</span>
-                </li>
-                <li className="flex items-start">
-                  <Check size={20} className="text-green-600 mr-2 mt-0.5" />
-                  <span>24/7 Notfalleinsatz</span>
+                  <span>Flexible Einsatzzeiten</span>
                 </li>
               </ul>
             </div>
@@ -497,38 +481,6 @@ const Services = () => {
             </div>
           </div>
 
-          {/* Service Card 4: Kranführer */}
-          <div className="bg-white dark:bg-slate-900 rounded-lg shadow-md overflow-hidden card-hover">
-            <div className="relative h-56 bg-gradient-to-br from-slate-100 to-gray-100 dark:from-slate-900/20 dark:to-gray-900/20 flex items-center justify-center">
-              <div className="text-6xl font-bold text-slate-600 dark:text-slate-400">🎢</div>
-            </div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold mb-3 flex items-center">
-                <span className="text-2xl mr-2">🎢</span>
-                Kranführer
-              </h3>
-              <ul className="space-y-2 mb-6">
-                <li className="flex items-start">
-                  <Check size={18} className="text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700 dark:text-gray-300">Zertifizierte Kranführer</span>
-                </li>
-                <li className="flex items-start">
-                  <Check size={18} className="text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700 dark:text-gray-300">Bau- & Industriemontagen</span>
-                </li>
-                <li className="flex items-start">
-                  <Check size={18} className="text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700 dark:text-gray-300">Schwerlasttransporte</span>
-                </li>
-              </ul>
-              <button 
-                onClick={() => openModal(serviceModals.kranfuehrer)}
-                className="text-orange-600 hover:text-orange-700 dark:text-orange-500 dark:hover:text-orange-400 font-medium inline-flex items-center"
-              >
-                Mehr erfahren <ArrowRight size={16} className="ml-1" />
-              </button>
-            </div>
-          </div>
 
           {/* Service Card 5: Reinigung */}
           <div className="bg-white dark:bg-slate-900 rounded-lg shadow-md overflow-hidden card-hover">
@@ -589,6 +541,39 @@ const Services = () => {
               </ul>
               <button 
                 onClick={() => openModal(serviceModals.umzuege)}
+                className="text-orange-600 hover:text-orange-700 dark:text-orange-500 dark:hover:text-orange-400 font-medium inline-flex items-center"
+              >
+                Mehr erfahren <ArrowRight size={16} className="ml-1" />
+              </button>
+            </div>
+          </div>
+
+          {/* Service Card 6: Weitere Dienstleistungen - moved to last position */}
+          <div className="bg-white dark:bg-slate-900 rounded-lg shadow-md overflow-hidden card-hover">
+            <div className="relative h-56 bg-gradient-to-br from-slate-100 to-gray-100 dark:from-slate-900/20 dark:to-gray-900/20 flex items-center justify-center">
+              <Users className="w-24 h-24 text-slate-600 dark:text-slate-400" />
+            </div>
+            <div className="p-6">
+              <h3 className="text-xl font-bold mb-3 flex items-center">
+                <Users className="w-6 h-6 mr-2 text-slate-600 dark:text-slate-400" />
+                Weitere Dienstleistungen
+              </h3>
+              <ul className="space-y-2 mb-6">
+                <li className="flex items-start">
+                  <Check size={18} className="text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-700 dark:text-gray-300">Kranführer-Service</span>
+                </li>
+                <li className="flex items-start">
+                  <Check size={18} className="text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-700 dark:text-gray-300">Personalleasing</span>
+                </li>
+                <li className="flex items-start">
+                  <Check size={18} className="text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-700 dark:text-gray-300">Maßgeschneiderte Lösungen</span>
+                </li>
+              </ul>
+              <button 
+                onClick={() => openModal(serviceModals.weitere)}
                 className="text-orange-600 hover:text-orange-700 dark:text-orange-500 dark:hover:text-orange-400 font-medium inline-flex items-center"
               >
                 Mehr erfahren <ArrowRight size={16} className="ml-1" />

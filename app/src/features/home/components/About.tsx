@@ -136,8 +136,8 @@ const About = () => {
             
             <div className="grid grid-cols-2 gap-4 mb-8">
               {[
-                { number: "96", label: "Zufriedene Kunden" },
-                { number: "156", label: "Abgeschlossene Projekte" },
+                { number: "200+", label: "Zufriedene Kunden" },
+                { number: "200+", label: "Abgeschlossene Projekte" },
                 { number: "100%", label: "Leistungsversprechen" },
                 { number: "24/7", label: "Bereitschaft" }
               ].map((stat, index) => (

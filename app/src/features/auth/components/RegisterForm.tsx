@@ -290,7 +290,7 @@ export default function RegisterForm() {
             className="h-4 w-4 mt-1 text-green-600 focus:ring-green-500 border-gray-300 rounded"
           />
           <label htmlFor="acceptTerms" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-            Ich stimme den <Link href="/terms" className="text-green-600 hover:text-green-500 dark:text-green-500 dark:hover:text-green-400">Nutzungsbedingungen</Link> und der <Link href="/privacy" className="text-green-600 hover:text-green-500 dark:text-green-500 dark:hover:text-green-400">Datenschutzerklärung</Link> zu.
+            Ich stimme den <Link href="/agb" className="text-green-600 hover:text-green-500 dark:text-green-500 dark:hover:text-green-400">Nutzungsbedingungen</Link> und der <Link href="/datenschutz" className="text-green-600 hover:text-green-500 dark:text-green-500 dark:hover:text-green-400">Datenschutzerklärung</Link> zu.
           </label>
         </div>
         {errors.acceptTerms && (

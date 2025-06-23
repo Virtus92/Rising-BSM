@@ -42,14 +42,22 @@ npm run db:seed
 
 ### Testing Commands
 ```bash
-# Run tests
+# Run all tests
 npm test
 
+# Run specific test suites
+npm run test:domain        # Domain model tests
+npm run test:client        # Client-side component tests
+npm run test:server        # Server-side API tests
+npm run test:integration   # Integration tests
+
 # Run tests in watch mode
-npm run test:watch
+npm run test:watch         # Client tests
+npm run test:watch:server  # Server tests
 
 # Run tests with coverage
-npm run test:ci
+npm run test:ci            # All tests with CI config
+npm run test:coverage      # All tests with coverage reports
 
 # Run a single test file
 npm test -- path/to/test.test.ts
@@ -155,6 +163,13 @@ Permissions follow a `category.action` format (e.g., `users.create`, `customers.
 - Comprehensive logging with `LoggingService`
 - Client-friendly error messages
 
+### Test Structure
+Tests are organized by type:
+- `jest.domain.config.mjs` - Domain model tests
+- `jest.client.config.mjs` - Client-side tests
+- `jest.server.config.mjs` - Server-side tests
+- `jest.integration.config.mjs` - Integration tests
+
 ## Key Implementation Notes
 
 ### When Creating New Features
@@ -202,6 +217,12 @@ A comprehensive webhook and scheduling system replacing n8n integration:
 - Service-specific webhook testing (n8n, Slack, Discord, etc.)
 - Located in `features/automation/`
 
+### API Key Management
+- Secure API key generation and management
+- Permission-based access control for API keys
+- Rate limiting and usage tracking
+- Located in `features/api-keys/`
+
 ### Key Lessons from Automation Implementation
 1. Always use `formatResponse` from `@/core/errors`
 2. Wrap `formatResponse` with `NextResponse.json()`
@@ -209,3 +230,19 @@ A comprehensive webhook and scheduling system replacing n8n integration:
 4. Handle webhook testing differently for each service (n8n doesn't support HEAD)
 5. Use proper error status code extraction pattern
 6. Follow existing factory patterns exactly
+
+## Environment Variables Required
+```env
+# Database
+DATABASE_URL=postgresql://username:password@host:port/database
+
+# Authentication
+JWT_SECRET=your-secret-key-at-least-32-characters
+JWT_EXPIRES_IN=15m
+JWT_REFRESH_SECRET=your-refresh-secret
+JWT_REFRESH_EXPIRES_IN=7d
+
+# Application
+NODE_ENV=development
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
+```

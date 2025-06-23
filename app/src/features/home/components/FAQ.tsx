@@ -45,7 +45,7 @@ const FAQ = () => {
   const faqs = [
     {
       question: "Welche Dienstleistungen bietet RISING BS an?",
-      answer: "RISING BS bietet ein umfassendes Spektrum an Dienstleistungen: Winterdienst (Schneeräumung & Streuung), Grünflächenbetreuung (Rasenpflege, Baum- & Heckenschnitt), Reinigung (Dampfreinigung ohne Chemie), Hausbetreuung, Umzüge & Transporte sowie Kranführerdienstleistungen."
+      answer: "RISING BS bietet ein umfassendes Spektrum an Dienstleistungen: Winterdienst (Schneeräumung & Streuung), Grünflächenbetreuung (Rasenpflege, Baum- & Heckenschnitt), Reinigung (Dampfreinigung ohne Chemie), Hausbetreuung, Umzüge & Transporte sowie weitere spezialisierte Dienstleistungen nach Bedarf."
     },
     {
       question: "In welchen Gebieten ist RISING BS tätig?",

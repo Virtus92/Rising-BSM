@@ -74,7 +74,7 @@ const Hero = () => {
                 { icon: <Sparkles className="w-5 h-5 mr-2" />, text: "Reinigung" },
                 { icon: <Home className="w-5 h-5 mr-2" />, text: "Hausbetreuung" },
                 { icon: <Truck className="w-5 h-5 mr-2" />, text: "Umzüge & Transporte" },
-                { icon: <Wrench className="w-5 h-5 mr-2" />, text: "Kranführer" }
+                { icon: <Wrench className="w-5 h-5 mr-2" />, text: "Weitere Services" }
               ].map((feature, index) => (
                 <div 
                   key={index} 
@@ -185,8 +185,8 @@ const Hero = () => {
           }}
         >
           {[
-            { label: "Zufriedene Kunden", value: "96" },
-            { label: "Abgeschlossene Projekte", value: "156" },
+            { label: "Zufriedene Kunden", value: "200+" },
+            { label: "Abgeschlossene Projekte", value: "200+" },
             { label: "Leistungsversprechen", value: "100%" },
             { label: "Servicebereiche", value: "6+" }
           ].map((stat, index) => (
