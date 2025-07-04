@@ -191,7 +191,7 @@ const RequestShowcase = () => {
 
   return (
     <section
-      id="request-section"
+      id="contact"
       className="py-20 bg-gradient-to-b from-slate-50 to-orange-50 dark:from-slate-900 dark:to-orange-950 relative overflow-hidden"
     >
       {/* Background decorations */}
