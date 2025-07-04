@@ -63,6 +63,9 @@ const RequestShowcase = () => {
 
   // Set up scroll detection
   useEffect(() => {
+    // Set visible immediately as fallback
+    const timer = setTimeout(() => setIsVisible(true), 100);
+    
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -72,13 +75,17 @@ const RequestShowcase = () => {
       { threshold: 0.1 }
     );
     
-    const element = document.getElementById('request-section');
+    const element = document.getElementById('contact');
     if (element) {
       observer.observe(element);
-      return () => {
-        observer.unobserve(element);
-      };
     }
+    
+    return () => {
+      clearTimeout(timer);
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
   }, []);
 
   // Validate form fields
