@@ -48,7 +48,7 @@ export const UpcomingAppointments = () => {
   };
   
   const handleAddAppointment = () => {
-    router.push('/dashboard/appointments/create');
+    router.push('/dashboard/appointments');
   };
   
   const handleRefresh = () => {
@@ -61,7 +61,7 @@ export const UpcomingAppointments = () => {
 
   const handleEditAppointment = (appointmentId: number | string, e: React.MouseEvent) => {
     e.stopPropagation();
-    router.push(`/dashboard/appointments/edit/${appointmentId}`);
+    router.push(`/dashboard/appointments?edit=${appointmentId}`);
   };
 
   const handleAddNote = async (appointmentId: number | string, e: React.MouseEvent) => {

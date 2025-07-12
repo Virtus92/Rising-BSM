@@ -94,7 +94,10 @@ describe('DtoFactory', () => {
         newsletter: true,
         status: CommonStatus.ACTIVE,
         type: CustomerType.BUSINESS,
-        notes: ['Note 1', 'Note 2'],
+        notes: [
+          { id: 1, message: 'Note 1', type: 'general', createdAt: now, createdBy: 1 },
+          { id: 2, message: 'Note 2', type: 'general', createdAt: now, createdBy: 1 }
+        ],
         appointments: [{ id: 1, title: 'Test Appointment' }],
         createdAt: now,
         updatedAt: now

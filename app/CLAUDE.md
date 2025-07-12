@@ -42,14 +42,22 @@ npm run db:seed
 
 ### Testing Commands
 ```bash
-# Run tests
+# Run all tests (domain, client, server, integration)
 npm test
 
+# Run specific test suites
+npm run test:domain        # Domain logic tests
+npm run test:client        # Client-side tests  
+npm run test:server        # Server-side tests
+npm run test:integration   # Integration tests
+
 # Run tests in watch mode
-npm run test:watch
+npm run test:watch         # Client tests in watch mode
+npm run test:watch:server  # Server tests in watch mode
 
 # Run tests with coverage
 npm run test:ci
+npm run test:coverage
 
 # Run a single test file
 npm test -- path/to/test.test.ts
