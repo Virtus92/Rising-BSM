@@ -16,18 +16,6 @@ export const GET = routeHandler(async (request: NextRequest) => {
   const serviceFactory = getServiceFactory();
   
   try {
-    // Check permission using the correct pattern with role
-    if (!await permissionMiddleware.hasPermission(
-      request.auth?.userId as number, 
-      SystemPermission.USERS_VIEW,
-      request.auth?.role
-    )) {
-      logger.warn(`Permission denied: User ${request.auth?.userId} does not have permission ${SystemPermission.USERS_VIEW}`);
-      return NextResponse.json(
-        formatResponse.error('You dont have permission to view user statistics', 403),
-        { status: 403 }
-      );
-    }
     
     // Get user service
     const userService = serviceFactory.createUserService();
@@ -71,5 +59,6 @@ export const GET = routeHandler(async (request: NextRequest) => {
     );
   }
 }, {
-  requiresAuth: true
+  requiresAuth: true,
+  requiredPermission: [SystemPermission.USERS_VIEW]
 });

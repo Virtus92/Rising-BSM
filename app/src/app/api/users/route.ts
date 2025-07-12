@@ -69,19 +69,16 @@ export const GET = routeHandler(
         limit: result.pagination.limit
       });
 
-      return NextResponse.json(formatResponse.success(result, 'Users retrieved successfully'));
+      return formatResponse.success(result, 'Users retrieved successfully');
     } catch (error) {
       logger.error('Error fetching users:', {
         error: error instanceof Error ? error.message : String(error),
         stack: error instanceof Error ? error.stack : undefined
       });
 
-      return NextResponse.json(
-        formatResponse.error(
-          error instanceof Error ? error.message : 'Failed to fetch users',
-          500
-        ),
-        { status: 500 }
+      return formatResponse.error(
+        error instanceof Error ? error.message : 'Failed to fetch users',
+        500
       );
     }
   },
@@ -130,22 +127,16 @@ export const POST = routeHandler(
         role: userRole
       });
 
-      return NextResponse.json(
-        formatResponse.success(newUser, 'User created successfully', 201),
-        { status: 201 }
-      );
+      return formatResponse.success(newUser, 'User created successfully', 201);
     } catch (error) {
       logger.error('Error creating user:', {
         error: error instanceof Error ? error.message : String(error),
         stack: error instanceof Error ? error.stack : undefined
       });
 
-      return NextResponse.json(
-        formatResponse.error(
-          error instanceof Error ? error.message : 'Failed to create user',
-          500
-        ),
-        { status: 500 }
+      return formatResponse.error(
+        error instanceof Error ? error.message : 'Failed to create user',
+        500
       );
     }
   },
@@ -171,10 +162,7 @@ export const DELETE = routeHandler(
       const { ids } = data;
 
       if (!ids || !Array.isArray(ids) || ids.length === 0) {
-        return NextResponse.json(
-          formatResponse.error('Invalid request: missing or empty ids array', 400),
-          { status: 400 }
-        );
+        return formatResponse.error('Invalid request: missing or empty ids array', 400);
       }
 
       // Get user context from auth
@@ -217,19 +205,16 @@ export const DELETE = routeHandler(
         }
       }
 
-      return NextResponse.json(formatResponse.success(result, 'Bulk delete completed'));
+      return formatResponse.success(result, 'Bulk delete completed');
     } catch (error) {
       logger.error('Error in bulk delete:', {
         error: error instanceof Error ? error.message : String(error),
         stack: error instanceof Error ? error.stack : undefined
       });
 
-      return NextResponse.json(
-        formatResponse.error(
-          error instanceof Error ? error.message : 'Failed to delete users',
-          500
-        ),
-        { status: 500 }
+      return formatResponse.error(
+        error instanceof Error ? error.message : 'Failed to delete users',
+        500
       );
     }
   },

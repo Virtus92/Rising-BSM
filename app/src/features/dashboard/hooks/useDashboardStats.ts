@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useToast } from '@/shared/hooks/useToast';
 import { getLogger } from '@/core/logging';
-import { ApiResponse } from '@/core/api/ApiClient';
 import { useAuth } from '@/features/auth/providers/AuthProvider';
 import AuthService from '@/features/auth/core/AuthService';
 
@@ -26,43 +25,6 @@ type UseDashboardStatsReturn = StatsState & {
   refreshStats: () => Promise<void>;
 };
 
-/**
- * Extracts count value from API response
- */
-const extractCount = (response: ApiResponse<any>): number => {
-  if (!response) {
-    logger.warn('extractCount called with undefined/null response');
-    return 0;
-  }
-  
-  if (!response.success) {
-    logger.warn('Unsuccessful API response:');
-    return 0;
-  }
-  
-  if (!response.data) {
-    logger.warn('Missing data in API response:');
-    return 0;
-  }
-  
-  // Get actual response structure to understand data format
-  const dataType = typeof response.data;
-  
-  // Handle direct number response
-  if (dataType === 'number') {
-    return response.data;
-  }
-  
-  // Standard API response format: { count: number }
-  if (dataType === 'object' && response.data !== null) {
-    if ('count' in response.data && typeof response.data.count === 'number') {
-      return response.data.count;
-    }
-  }
-  
-  // If we can't extract a count, return 0
-  return 0;
-};
 
 /**
  * Hook for fetching and managing dashboard statistics
@@ -130,100 +92,39 @@ export const useDashboardStats = (): UseDashboardStatsReturn => {
     }
     
     try {
-      // Make direct API calls to count endpoints
-      const usersPromise = fetch('/api/users/count', { 
+      // Use dedicated dashboard stats endpoint that only requires authentication
+      const response = await fetch('/api/dashboard/stats', { 
         credentials: 'include',
         headers: { 'Cache-Control': 'no-cache' }
       });
-      
-      const customersPromise = fetch('/api/customers/count', { 
-        credentials: 'include',
-        headers: { 'Cache-Control': 'no-cache' }
-      });
-      
-      const requestsPromise = fetch('/api/requests/count', { 
-        credentials: 'include',
-        headers: { 'Cache-Control': 'no-cache' }
-      });
-      
-      const appointmentsPromise = fetch('/api/appointments/count', { 
-        credentials: 'include',
-        headers: { 'Cache-Control': 'no-cache' }
-      });
-      
-      // Wait for all promises to settle
-      const [usersResponse, customersResponse, requestsResponse, appointmentsResponse] = 
-        await Promise.allSettled([
-          usersPromise,
-          customersPromise,
-          requestsPromise,
-          appointmentsPromise
-        ]);
       
       // Track successful fetch time
       lastFetchTimeRef.current = Date.now();
 
       if (isMountedRef.current) {
-        // Parse responses and extract counts
-        let userCount = 0;
-        let customerCount = 0;
-        let requestCount = 0;
-        let appointmentCount = 0;
-        
-        // Process users response
-        if (usersResponse.status === 'fulfilled' && usersResponse.value.ok) {
-          const data = await usersResponse.value.json();
-          userCount = data.data?.count || 0;
-        }
-        
-        // Process customers response
-        if (customersResponse.status === 'fulfilled' && customersResponse.value.ok) {
-          const data = await customersResponse.value.json();
-          customerCount = data.data?.count || 0;
-        }
-        
-        // Process requests response
-        if (requestsResponse.status === 'fulfilled' && requestsResponse.value.ok) {
-          const data = await requestsResponse.value.json();
-          requestCount = data.data?.count || 0;
-        }
-        
-        // Process appointments response
-        if (appointmentsResponse.status === 'fulfilled' && appointmentsResponse.value.ok) {
-          const data = await appointmentsResponse.value.json();
-          appointmentCount = data.data?.count || 0;
-        }
-
-        // Update state with fetched data
-        setState(prev => ({
-          ...prev,
-          userCount,
-          customerCount,
-          requestCount,
-          appointmentCount,
-          loading: false,
-          error: null
-        }));
-      }
-
-      // Check if all requests failed
-      const allFailed = [usersResponse, customersResponse, requestsResponse, appointmentsResponse]
-        .every(r => r.status === 'rejected' || (r.status === 'fulfilled' && !r.value.ok));
-        
-      if (allFailed && isMountedRef.current) {
-        const error = new Error('Failed to fetch all dashboard statistics.');
-        setState(prev => ({
-          ...prev,
-          loading: false,
-          error
-        }));
-        
-        if (showErrors) {
-          toast({
-            title: 'Failed to fetch statistics',
-            description: 'Could not retrieve dashboard data. Please try again later.',
-            variant: 'error'
-          });
+        if (response.ok) {
+          const result = await response.json();
+          
+          if (result.success && result.data) {
+            const stats = result.data;
+            
+            // Update state with fetched data from dashboard stats
+            setState(prev => ({
+              ...prev,
+              userCount: stats.users?.total || 0,
+              customerCount: stats.customers?.total || 0,
+              requestCount: stats.requests?.total || 0,
+              appointmentCount: stats.appointments?.total || 0,
+              loading: false,
+              error: null
+            }));
+          } else {
+            throw new Error(result.message || 'Invalid response format');
+          }
+        } else {
+          const errorText = await response.text();
+          console.error('Dashboard stats API failed:', response.status, errorText);
+          throw new Error(`API request failed with status ${response.status}`);
         }
       }
     } catch (error) {

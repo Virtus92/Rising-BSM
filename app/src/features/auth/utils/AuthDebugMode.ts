@@ -107,6 +107,7 @@ if (typeof window !== 'undefined') {
     // Add debug indicator to page
     setTimeout(() => {
       const debugIndicator = document.createElement('div');
+      debugIndicator.setAttribute('data-auth-debug-indicator', 'true');
       debugIndicator.style.position = 'fixed';
       debugIndicator.style.bottom = '10px';
       debugIndicator.style.right = '10px';
@@ -180,8 +181,8 @@ export function disableAuthDebugMode(): void {
     
     // Remove debug indicator from page
     const debugIndicator = document.querySelector('[data-auth-debug-indicator]');
-    if (debugIndicator) {
-      debugIndicator.remove();
+    if (debugIndicator && debugIndicator.parentNode) {
+      debugIndicator.parentNode.removeChild(debugIndicator);
     }
     
     // Reload page to apply changes

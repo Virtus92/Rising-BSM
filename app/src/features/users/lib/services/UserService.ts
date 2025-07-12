@@ -55,7 +55,12 @@ export class UserService {
   static async getUsers(filters?: UserFilterParamsDto) {
     try {
       const result = await userServiceClientInstance.findUsers(filters || {});
-      return wrapInApiResponse(result);
+      return {
+        success: true,
+        error: null,
+        data: result,
+        message: 'Users retrieved successfully'
+      };
     } catch (error) {
       return handleError(error, 'Failed to get users');
     }

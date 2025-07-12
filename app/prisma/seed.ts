@@ -26,6 +26,35 @@ async function hashPassword(password: string) {
   return await bcrypt.hash(password, 10);
 }
 
+// Import permission definitions
+import { SystemPermissionMap } from '../src/domain/permissions/SystemPermissionMap';
+
+async function seedPermissions() {
+  console.log('Seeding permissions...');
+  
+  // Get all permission definitions
+  const permissionDefinitions = Object.values(SystemPermissionMap);
+  
+  for (const definition of permissionDefinitions) {
+    await prisma.permission.upsert({
+      where: { code: definition.code },
+      update: {
+        name: definition.name,
+        description: definition.description,
+        category: definition.category
+      },
+      create: {
+        code: definition.code,
+        name: definition.name,
+        description: definition.description,
+        category: definition.category
+      }
+    });
+  }
+  
+  console.log(`Seeded ${permissionDefinitions.length} permissions`);
+}
+
 async function main() {
   await prisma.userActivity.deleteMany();
   await prisma.appointmentNote.deleteMany();
@@ -42,6 +71,9 @@ async function main() {
   await prisma.notification.deleteMany();
   await prisma.systemSettings.deleteMany();
   await prisma.user.deleteMany();
+
+  // Seed permissions first
+  await seedPermissions();
 
   const adminName = await askQuestion('Admin Name: ');
   const adminEmail = await askQuestion('Admin Email: ');
